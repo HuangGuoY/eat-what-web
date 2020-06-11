@@ -31,6 +31,7 @@ import Layout from '@/layout'
  * all roles can be accessed
  */
 export const constantRoutes = [
+
   {
     path: '/login',
     component: () => import('@/views/login/index'),
@@ -127,6 +128,7 @@ export const constantRoutes = [
   {
     path: 'external-link',
     component: Layout,
+    meta: { title: '博客', icon: 'food2' },
     children: [
       {
         path: 'https://huangguoy.github.io/',
