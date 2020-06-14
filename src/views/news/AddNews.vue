@@ -70,7 +70,7 @@
           <Tinymce ref="editor" v-model="postForm.content" :height="400" />
         </el-form-item>
         <el-form-item style="margin-bottom: 30px;">
-          <el-button v-loading="loading" style="margin-left: 10px;" type="waring" @click="submitForm">
+          <el-button v-loading="loading" style="margin-left: 10px;" type="waring" @click="resetForm('postForm')">
             重置
           </el-button>
           <el-button v-loading="loading" type="success" @click="submitForm">
@@ -265,16 +265,11 @@ export default {
         }
       })
     },
-    draftForm() {
-      if (this.postForm.content.length === 0 || this.postForm.title.length === 0) {
-        this.$message({
-          message: '请填写必要的标题和内容',
-          type: 'warning'
-        })
-        return
-      }
+    resetForm(formName) {
+      this.$refs[formName].resetFields()
+      this.postForm.content = ''
       this.$message({
-        message: '保存成功',
+        message: '重置成功',
         type: 'success',
         showClose: true,
         duration: 1000
