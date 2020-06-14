@@ -5,6 +5,7 @@ import user from './user'
 import table from './table'
 import food from './food'
 import drink from './drink'
+import news from './news'
 import category from './category'
 import search from './remote-search'
 
@@ -14,6 +15,7 @@ const mocks = [
   ...category,
   ...food,
   ...drink,
+  ...news,
   ...search
 ]
 

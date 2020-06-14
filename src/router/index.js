@@ -61,7 +61,7 @@ export const constantRoutes = [
   {
     path: '/category',
     component: Layout,
-    redirect: '/category/index',
+    redirect: '/category/food',
     name: '分类管理',
     meta: { title: '分类管理', icon: 'tab' },
     children: [
@@ -105,7 +105,7 @@ export const constantRoutes = [
     children: [
       {
         path: 'index',
-        name: '饮料列表',
+        name: '食物列表',
         component: () => import('@/views/food/index'),
         meta: { title: '食物列表', icon: 'food2' }
       }
@@ -121,6 +121,44 @@ export const constantRoutes = [
         name: 'Form',
         component: () => import('@/views/form/index'),
         meta: { title: '表单', icon: 'form' }
+      }
+    ]
+  },
+
+  {
+    path: '/map',
+    component: Layout,
+    children: [
+      {
+        path: 'index',
+        name: 'Map',
+        component: () => import('@/views/map/index'),
+        meta: { title: '地图', icon: 'clipboard' }
+      }
+    ]
+  },
+
+  {
+    path: '/news',
+    component: Layout,
+    redirect: '/news/create',
+    name: 'Example',
+    meta: {
+      title: '新闻管理',
+      icon: 'edit'
+    },
+    children: [
+      {
+        path: 'create',
+        component: () => import('@/views/news/AddNews.vue'),
+        name: 'AddNews',
+        meta: { title: '新增新闻', icon: 'edit' }
+      },
+      {
+        path: 'list',
+        component: () => import('@/views/news/NewsList.vue'),
+        name: 'NewsList',
+        meta: { title: '新闻列表', icon: 'edit' }
       }
     ]
   },

@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "filepond": "^4.17.1",
+    "vue-filepond": "^6.0.2"
+  }
+}
