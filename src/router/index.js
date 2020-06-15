@@ -133,7 +133,7 @@ export const constantRoutes = [
         path: 'index',
         name: 'Map',
         component: () => import('@/views/map/index'),
-        meta: { title: '地图', icon: 'clipboard' }
+        meta: { title: '地图', icon: 'international' }
       }
     ]
   },

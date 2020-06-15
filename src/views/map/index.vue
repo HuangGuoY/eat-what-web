@@ -2,7 +2,7 @@
   <div>
     <el-container>
       <el-header>
-        <div class="tip">
+        <div class="tip-normal">
           <span>使用的是</span>
           <el-link type="primary" href="https://dafrok.github.io/vue-baidu-map/#/">vue-baidu-map</el-link>
         </div>
@@ -76,17 +76,4 @@ export default {
   top: -3px;
 }
 </style>
-<style scoped>
-.tip{
-  padding: 8px 16px;
-  background-color: #ecf8ff;
-  border-radius: 4px;
-  border-left: 5px solid #50bfff;
-  margin: 20px 0;
-}
-.tip span{
-  font-size: 14px;
-  color: #5e6d82;
-  line-height: 1.5em;
-}
-</style>
+

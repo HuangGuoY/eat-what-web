@@ -1,0 +1,30 @@
+@mixin gobal {
+  border-radius: 4px;
+  margin: 20px 0;
+  padding: 8px 16px;
+}
+@mixin tip-span{
+  font-size: 14px;
+    color: #5e6d82;
+    line-height: 1.5em;
+}
+
+.tip-normal{ 
+  background-color: #ecf8ff;
+  border-left: 5px solid #50bfff;
+  @include gobal;
+  span{
+    @include tip-span
+  }
+}
+
+.tip-danger{
+  background-color: #fff6f7;
+  border-left: 5px solid #fe6c6f;
+  @include gobal;
+  span{
+    @include tip-span
+  }
+}
+
+
