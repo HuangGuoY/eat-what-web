@@ -35,7 +35,12 @@
           <span>{{ scope.row.createTime }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="名字">
+      <el-table-column label="图图" align="center">
+        <template slot-scope="scope">
+          <img :src="scope.row.img" alt="" srcset="">
+        </template>
+      </el-table-column>
+      <el-table-column label="名字" align="center">
         <template slot-scope="scope">
           {{ scope.row.name }}
         </template>

@@ -18,10 +18,11 @@ const randomDate = (startDate, endDate) => {
 
 const data = Mock.mock({
   'items|15': [{
-    id: '@id',
+    id: '@increment',
     'name|+1': ['可口可乐', '百事可乐', '雪碧', '维他', '非常可乐', '茉莉茶'],
     'category|1': ['碳酸饮料', '奶茶', '茶饮料', '果汁', '咖啡类', '乳饮料'],
     'status|1': ['正常', '下架'],
+    'img': '@image("200x100", "#000", "#fff", "png", "多喝点")', // 生成一个200*100, 背景色#000，前景色#fff, 格式png, 文字mock.js的图片
     'createTime|1': function() {
       var category = []
       for (var i = 30; i > 0; i--) {

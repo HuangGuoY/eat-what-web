@@ -16,19 +16,19 @@
           {{ scope.$index }}
         </template>
       </el-table-column>
-      <el-table-column label="标题">
+      <el-table-column label="名称" align="center">
         <template slot-scope="scope">
-          {{ scope.row.title }}
+          {{ scope.row.name }}
         </template>
       </el-table-column>
-      <el-table-column label="作者" width="110" align="center">
+      <el-table-column label="分类" width="115" align="center">
         <template slot-scope="scope">
-          <el-tag>{{ scope.row.author }}</el-tag>
+          {{ scope.row.category }}
         </template>
       </el-table-column>
-      <el-table-column label="阅读量" width="115" align="center">
+      <el-table-column label="状态" width="150" align="center">
         <template slot-scope="scope">
-          {{ scope.row.pageviews }}
+          <el-tag>{{ scope.row.status }}</el-tag>
         </template>
       </el-table-column>
       <el-table-column align="center" label="创建时间" width="220">
@@ -42,7 +42,7 @@
 </template>
 
 <script>
-import { fetchList } from '@/api/news'
+import { getList } from '@/api/drink'
 import { parseTime } from '@/utils'
 // options components
 import FilenameOption from './components/FilenameOption'
@@ -68,7 +68,7 @@ export default {
   methods: {
     fetchData() {
       this.listLoading = true
-      fetchList().then(response => {
+      getList().then(response => {
         this.list = response.data.items
         this.listLoading = false
       })
@@ -76,8 +76,8 @@ export default {
     handleDownload() {
       this.downloadLoading = true
       import('@/vendor/Export2Excel').then(excel => {
-        const tHeader = ['序号', '标题', '作者', '阅读量', '创建时间']
-        const filterVal = ['id', 'title', 'author', 'pageviews', 'display_time']
+        const tHeader = ['序号', '名称', '分类', '状态', '创建时间']
+        const filterVal = ['id', 'name', 'category', 'status', 'createTime']
         const list = this.list
         const data = this.formatJson(filterVal, list)
         excel.export_json_to_excel({

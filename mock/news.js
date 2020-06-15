@@ -34,9 +34,9 @@ for (let i = 0; i < count; i++) {
       var index = Math.floor((Math.random() * category.length))
       return category[index]
     },
-    author: '@first',
-    reviewer: '@first',
-    title: '@title(5, 10)',
+    author: '@cname',
+    reviewer: '@cname',
+    title: '@ctitle',
     content_short: 'mock data',
     content: baseContent,
     forecast: '@float(0, 100, 2, 2)',

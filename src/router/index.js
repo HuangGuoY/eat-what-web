@@ -113,6 +113,31 @@ export const constantRoutes = [
   },
 
   {
+    path: '/news',
+    component: Layout,
+    redirect: '/news/create',
+    name: 'Example',
+    meta: {
+      title: '新闻管理',
+      icon: 'edit'
+    },
+    children: [
+      {
+        path: 'create',
+        component: () => import('@/views/news/AddNews.vue'),
+        name: 'AddNews',
+        meta: { title: '新增新闻', icon: 'edit' }
+      },
+      {
+        path: 'list',
+        component: () => import('@/views/news/NewsList.vue'),
+        name: 'NewsList',
+        meta: { title: '新闻列表', icon: 'edit' }
+      }
+    ]
+  },
+
+  {
     path: '/form',
     component: Layout,
     children: [
@@ -176,38 +201,13 @@ export const constantRoutes = [
   },
 
   {
-    path: '/news',
-    component: Layout,
-    redirect: '/news/create',
-    name: 'Example',
-    meta: {
-      title: '新闻管理',
-      icon: 'edit'
-    },
-    children: [
-      {
-        path: 'create',
-        component: () => import('@/views/news/AddNews.vue'),
-        name: 'AddNews',
-        meta: { title: '新增新闻', icon: 'edit' }
-      },
-      {
-        path: 'list',
-        component: () => import('@/views/news/NewsList.vue'),
-        name: 'NewsList',
-        meta: { title: '新闻列表', icon: 'edit' }
-      }
-    ]
-  },
-
-  {
     path: 'external-link',
     component: Layout,
-    meta: { title: '博客', icon: 'food2' },
+    meta: { title: '个人主页', icon: 'food2' },
     children: [
       {
-        path: 'https://huangguoy.github.io/',
-        meta: { title: '外链', icon: 'link' }
+        path: 'https://miaoguoguo.gitee.io/personalpage/index.html',
+        meta: { title: '外链-个人主页', icon: 'link' }
       }
     ]
   },

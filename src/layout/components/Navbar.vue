@@ -7,7 +7,20 @@
     <div class="right-menu">
       <el-dropdown class="avatar-container" trigger="click">
         <div class="avatar-wrapper">
-          <img :src="avatar+'?imageView2/1/w/80/h/80'" class="user-avatar">
+          <img src="@/images/menu.png" class="menu-icon">
+        </div>
+        <el-dropdown-menu slot="dropdown" class="user-dropdown">
+          <el-dropdown-item @click.native="dialog = true">
+            <img src="@/images/weather.png" class="dropdown-icon">天气
+          </el-dropdown-item>
+          <el-dropdown-item @click.native="todoDialogVisible = true">
+            <img src="@/images/notepad.png" class="dropdown-icon">备忘录
+          </el-dropdown-item>
+        </el-dropdown-menu>
+      </el-dropdown>
+      <el-dropdown class="avatar-container" trigger="click">
+        <div class="avatar-wrapper">
+          <img :src="avatar+'?imageView2/1/w/64/h/46'" class="user-avatar">
           <i class="el-icon-caret-bottom" />
         </div>
         <el-dropdown-menu slot="dropdown" class="user-dropdown">
@@ -52,6 +65,16 @@
         <el-button type="primary" style="width: 40%" @click="submitForm('form')">{{ loading ? '提交中 ...' : '确 定' }}</el-button>
       </div>
     </el-drawer>
+
+    <el-dialog
+      title="备忘录"
+      :visible.sync="todoDialogVisible"
+      width="30%"
+      center
+    >
+      <TodoList />
+    </el-dialog>
+
   </div>
 </template>
 
@@ -59,11 +82,13 @@
 import { mapGetters } from 'vuex'
 import Breadcrumb from '@/components/Breadcrumb'
 import Hamburger from '@/components/Hamburger'
+import TodoList from '@/components/TodoList'
 
 export default {
   components: {
     Breadcrumb,
-    Hamburger
+    Hamburger,
+    TodoList
   },
   data() {
     var checkAge = (rule, value, callback) => {
@@ -92,6 +117,7 @@ export default {
     return {
       table: false,
       dialog: false,
+      todoDialogVisible: false,
       loading: false,
       form: {
         name: '',
@@ -168,6 +194,16 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.menu-icon{
+  width: 45px;
+}
+.el-dropdown-menu__item{
+  display: flex;
+  align-items: center;
+}
+.dropdown-icon{
+  width: 48px;
+}
 .navbar {
   height: 50px;
   overflow: hidden;
@@ -219,7 +255,11 @@ export default {
       }
     }
 
-    .avatar-container {
+    .avatar-container :not(last-child){
+      margin-right: 5px;
+    }
+
+    .avatar-container:last-child {
       margin-right: 30px;
 
       .avatar-wrapper {
