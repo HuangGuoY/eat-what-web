@@ -10,7 +10,7 @@
           <img src="@/images/menu.png" class="menu-icon">
         </div>
         <el-dropdown-menu slot="dropdown" class="user-dropdown">
-          <el-dropdown-item @click.native="dialog = true">
+          <el-dropdown-item @click.native="weatherDialogVisible = true">
             <img src="@/images/weather.png" class="dropdown-icon">天气
           </el-dropdown-item>
           <el-dropdown-item @click.native="todoDialogVisible = true">
@@ -32,8 +32,8 @@
           <el-dropdown-item @click.native="dialog = true">
             修改信息
           </el-dropdown-item>
-          <el-dropdown-item divided @click.native="logout">
-            <span style="display:block;">退出</span>
+          <el-dropdown-item @click.native="logout">
+            退出
           </el-dropdown-item>
         </el-dropdown-menu>
       </el-dropdown>
@@ -67,9 +67,18 @@
     </el-drawer>
 
     <el-dialog
+      title="天气"
+      :visible.sync="weatherDialogVisible"
+      width="820px"
+      center
+    >
+      <Weather />
+    </el-dialog>
+
+    <el-dialog
       title="备忘录"
       :visible.sync="todoDialogVisible"
-      width="30%"
+      width="40%"
       center
     >
       <TodoList />
@@ -83,12 +92,14 @@ import { mapGetters } from 'vuex'
 import Breadcrumb from '@/components/Breadcrumb'
 import Hamburger from '@/components/Hamburger'
 import TodoList from '@/components/TodoList'
+import Weather from '@/components/Weather'
 
 export default {
   components: {
     Breadcrumb,
     Hamburger,
-    TodoList
+    TodoList,
+    Weather
   },
   data() {
     var checkAge = (rule, value, callback) => {
@@ -118,6 +129,7 @@ export default {
       table: false,
       dialog: false,
       todoDialogVisible: false,
+      weatherDialogVisible: false,
       loading: false,
       form: {
         name: '',
@@ -192,7 +204,6 @@ export default {
   }
 }
 </script>
-
 <style lang="scss" scoped>
 .menu-icon{
   width: 45px;
