@@ -152,7 +152,7 @@ export default {
     getData() {
       var obj = this
       obj.dialogFormVisible = false
-      axios.get('http://restapi.amap.com/v3/weather/weatherInfo?city=' +
+      axios.get('https://restapi.amap.com/v3/weather/weatherInfo?city=' +
         obj.cityCode + '&key=' + obj.dataApi)
         .then((response) => {
           if (response.data.status === '1') {
@@ -164,7 +164,7 @@ export default {
         .catch((error) => {
           console.log(error)
         })
-      axios.get('http://restapi.amap.com/v3/weather/weatherInfo?extensions=all&city=' +
+      axios.get('https://restapi.amap.com/v3/weather/weatherInfo?extensions=all&city=' +
         obj.cityCode + '&key=' + obj.dataApi)
         .then((response) => {
           if (response.data.status === '1') {
