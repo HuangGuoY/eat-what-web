@@ -30,6 +30,7 @@
       <div class="week-container">
         <ul class="week-list">
           <li v-for="(item, index) in futureWeatherData.casts" :key="index" :class="index === 0 ? 'active':''">
+            <span class="day-name"><i :class="todayWeatherData.weather | iconFilter" style="font-size:24px" /></span>
             <span class="day-name">{{ dayName[index] }}</span>
             <span class="day-temp">{{ item.nighttemp }}~{{ item.daytemp }}°C</span>
           </li>
@@ -37,8 +38,38 @@
         </ul>
       </div>
       <div class="location-container">
-        <button class="location-button"><i data-feather="map-pin" /><span>改变城市</span></button>
+        <button class="location-button" @click="dialogFormVisible = true"><i data-feather="map-pin" /><span>改变城市</span></button>
       </div>
+
+      <el-dialog
+        title="选择城市"
+        :visible.sync="dialogFormVisible"
+        width="30%"
+        append-to-body
+      >
+        <el-form :model="form">
+          <el-form-item label="活动区域">
+            <el-select v-model="cityCode" placeholder="请选择城市">
+              <el-option label="南宁" value="450100" />
+              <el-option label="北京" value="110000" />
+              <el-option label="上海" value="310000" />
+              <el-option label="广州" value="440100" />
+              <el-option label="杭州" value="330100" />
+              <el-option label="重庆" value="500000" />
+              <el-option label="西安" value="610100" />
+              <el-option label="成都" value="510100" />
+              <el-option label="南京" value="320100" />
+              <el-option label="武汉" value="420100" />
+              <el-option label="长沙" value="430100" />
+            </el-select>
+          </el-form-item>
+        </el-form>
+        <div slot="footer" class="dialog-footer">
+          <el-button @click="dialogFormVisible = false">取 消</el-button>
+          <el-button type="primary" @click="getData">确 定</el-button>
+        </div>
+      </el-dialog>
+
     </div>
   </div>
 </template>
@@ -55,6 +86,7 @@ export default {
   filters: {
     iconFilter(weather) {
       const iconMap = {
+        '热': 'el-icon-sunrise',
         '晴': 'el-icon-sunny',
         '晴间多云': 'el-icon-cloudy-and-sunny',
         '阴': 'el-icon-cloudy',
@@ -64,6 +96,9 @@ export default {
         '大暴雨': 'el-icon-heavy-rain',
         '特大暴雨': 'el-icon-heavy-rain',
         '雷阵雨': 'el-icon-lightning',
+        '细雨': 'el-icon-light-rain',
+        '毛毛雨': 'el-icon-light-rain',
+        '小雨': 'el-icon-light-rain',
         '雨': 'el-icon-light-rain',
         '阵雨': 'el-icon-light-rain'
       }
@@ -93,7 +128,11 @@ export default {
         casts: null
       },
       week: moment().format('dddd'),
-      nowDate: moment().format('MMM/Do')
+      nowDate: moment().format('MMM/Do'),
+      form: {
+        name: ''
+      },
+      dialogFormVisible: false
     }
   },
   mounted() {
@@ -112,6 +151,7 @@ export default {
     },
     getData() {
       var obj = this
+      obj.dialogFormVisible = false
       axios.get('http://restapi.amap.com/v3/weather/weatherInfo?city=' +
         obj.cityCode + '&key=' + obj.dataApi)
         .then((response) => {
@@ -129,7 +169,6 @@ export default {
         .then((response) => {
           if (response.data.status === '1') {
             obj.futureWeatherData = response.data.forecasts[0]
-            console.log(obj.futureWeatherData)
           } else {
             obj.appTitle = '天气信息获取失败'
           }
@@ -234,7 +273,6 @@ body {
 	margin-top: 10px;
 }
 
-
 .weather-container {
 	position: absolute;
 	bottom: 25px;
@@ -327,7 +365,7 @@ body {
 }
 
 .location-container {
-	padding: 60px 35px;
+	padding: 50px 35px;
 }
 
 .location-button {
