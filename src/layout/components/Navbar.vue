@@ -206,6 +206,7 @@ export default {
 </script>
 <style lang="scss" scoped>
 .menu-icon{
+  cursor: pointer;
   width: 45px;
 }
 .el-dropdown-menu__item{
