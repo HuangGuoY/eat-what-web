@@ -50,11 +50,80 @@
         <el-button @click="resetForm('ruleForm')">重置</el-button>
       </el-form-item>
     </el-form>
+
+    <div class="tip-normal">
+      <h4>分步型表单</h4>
+    </div>
+
+    <el-steps :active="stepForm.active" finish-status="success" style="padding: 0 10%">
+      <el-step title="步骤 1" />
+      <el-step title="步骤 2" />
+      <el-step title="步骤 3" />
+    </el-steps>
+    <el-form ref="stepForm" :model="stepForm" :rules="rules" label-width="100px" class="demo-ruleForm" style="padding: 20px 10%;text-align:center">
+      <div class="el-input" style="width: 300px;">
+        <el-form-item v-show="stepForm.active === 0" label="年龄" prop="age">
+          <el-input
+            v-model="stepForm.age"
+            type="num"
+            placeholder="请输入年龄"
+            maxlength="3"
+            show-word-limit
+            clearable
+          />
+        </el-form-item>
+        <el-form-item v-show="stepForm.active === 1" label="身高" prop="height">
+          <el-input
+            v-model="stepForm.height"
+            type="num"
+            placeholder="请输入身高(CM)"
+            maxlength="3"
+            show-word-limit
+            clearable
+          />
+        </el-form-item>
+        <el-form-item v-show="stepForm.active === 2" label="体重" prop="weight">
+          <el-input
+            v-model="stepForm.weight"
+            type="num"
+            placeholder="请输入体重"
+            show-word-limit
+            clearable
+          />
+        </el-form-item>
+      </div>
+      <div>
+        <el-button style="margin-top: 20px;" @click="next('stepForm')">下一步</el-button>
+      </div>
+
+    </el-form>
+
   </div>
 </template>
 <script>
 export default {
   data() {
+    var checkAge = (rule, value, callback) => {
+      if (value === '' && this.stepForm.active === 0) {
+        callback(new Error('请输入年龄'))
+      } else {
+        callback()
+      }
+    }
+    var checkHeight = (rule, value, callback) => {
+      if (value === '' && this.stepForm.active === 1) {
+        callback(new Error('请输入高度'))
+      } else {
+        callback()
+      }
+    }
+    var checkWeight = (rule, value, callback) => {
+      if (value === '' && this.stepForm.active === 2) {
+        callback(new Error('请输入体重'))
+      } else {
+        callback()
+      }
+    }
     return {
       ruleForm: {
         name: '',
@@ -88,7 +157,22 @@ export default {
         ],
         desc: [
           { required: true, message: '请填写活动形式', trigger: 'blur' }
+        ],
+        age: [
+          { validator: checkAge, trigger: 'blur' }
+        ],
+        height: [
+          { validator: checkHeight, trigger: 'blur' }
+        ],
+        weight: [
+          { validator: checkWeight, trigger: 'blur' }
         ]
+      },
+      stepForm: {
+        active: 0,
+        age: '',
+        height: '',
+        weight: ''
       }
     }
   },
@@ -105,6 +189,23 @@ export default {
     },
     resetForm(formName) {
       this.$refs[formName].resetFields()
+    },
+    next(formName) {
+      this.$refs[formName].validate((valid) => {
+        if (valid) {
+          this.stepForm.active++
+          if (this.stepForm.active === 3) {
+            this.$notify({
+              title: '提示',
+              message: '已完成所有信息填写',
+              type: 'success'
+            })
+            this.stepForm.active = 0
+          }
+        } else {
+          return false
+        }
+      })
     }
   }
 }
