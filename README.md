@@ -20,9 +20,3 @@ npm install
 启动:
 npm run dev
 ```
-
-
-
-## License
-
-[MIT](https://github.com/PanJiaChen/vue-admin-template/blob/master/LICENSE) license.
