@@ -182,7 +182,20 @@ export default {
 </script>
 
 <style scoped>
-@import url('https://fonts.googleapis.com/css?family=Montserrat:400,700,900&display=swap');
+
+/* montserrat-regular */
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: regular;
+  src: url('//lib.baomitu.com/fonts/montserrat/montserrat-regular.eot'); /* IE9 Compat Modes */
+  src: local('Montserrat'), local('Montserrat-Normal'),
+       url('//lib.baomitu.com/fonts/montserrat/montserrat-regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+       url('//lib.baomitu.com/fonts/montserrat/montserrat-regular.woff2') format('woff2'), /* Super Modern Browsers */
+       url('//lib.baomitu.com/fonts/montserrat/montserrat-regular.woff') format('woff'), /* Modern Browsers */
+       url('//lib.baomitu.com/fonts/montserrat/montserrat-regular.ttf') format('truetype'), /* Safari, Android, iOS */
+       url('//lib.baomitu.com/fonts/montserrat/montserrat-regular.svg#Montserrat') format('svg'); /* Legacy iOS */
+}
 
 * {
 	-webkit-box-sizing: border-box;
